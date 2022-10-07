@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { addToDb, getStoredCart } from '../../utilities/fakedb';
+import { useLoaderData } from 'react-router-dom';
+import { addToDb, deleteShoppingCart, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Products/Product';
 import './Shop.css';
@@ -7,22 +8,16 @@ import './Shop.css';
 
 import './Shop.css';
 
-const Shop = () => {
-    const [products, setProducts] = useState([]);
 
+const Shop = () => {
+    const products = useLoaderData();
     const [cart, setCart] = useState([]);
 
+    const clearCart = () => {
+        setCart([]);
+        deleteShoppingCart();
+    }
 
-    useEffect(() => {
-        // console.log('product load before fetch');
-
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data)
-                // console.log('products loaded')
-            })
-    }, []);
 
     useEffect(() => {
         // console.log('Local store first line', products)
@@ -74,6 +69,7 @@ const Shop = () => {
             <div className="cart-container">
                 <Cart
                     cart={cart}
+                    clearCart={clearCart}
                 ></Cart>
             </div>
 

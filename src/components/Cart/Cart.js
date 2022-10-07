@@ -2,11 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import './Cart.css';
+import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
-    const { cart } = props;
+    const { cart, clearCart } = props;
 
-    console.log(cart);
+    // console.log(cart);
 
 
 
@@ -37,16 +38,18 @@ const Cart = (props) => {
             <p className='left'>Tax: ${tax}</p>
             <h3 className='left cart-bottom'>Grand Total: ${grandTotal.toFixed(2)}</h3>
 
-            <button className='btn red'>
+
+            <button className='btn red' onClick={clearCart}>
                 <p>Clear Cart </p>
                 <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
             </button>
 
-            <button className='btn orrange'>
-                <p>Review Order </p>
-                <FontAwesomeIcon className='icon' icon={faArrowRight}></FontAwesomeIcon>
-            </button>
-
+            <Link to='/orders'>
+                <button className='btn orrange'>
+                    <p>Review Order </p>
+                    <FontAwesomeIcon className='icon' icon={faArrowRight}></FontAwesomeIcon>
+                </button>
+            </Link>
         </div>
     );
 };
