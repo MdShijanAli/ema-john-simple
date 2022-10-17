@@ -30,8 +30,8 @@ const Cart = (props) => {
 
 
     return (
-        <div className='sticky top-28 pb-60'>
-            <h3 className='mt-36 text-center text-xl font-bold mb-10'>Order Summary</h3>
+        <div className='sticky top-24 h-fit '>
+            <h3 className='mt-20 text-center text-xl font-bold mb-10'>Order Summary</h3>
             <p className='ml-6 my-2 text-lg'>Selected Items: {quantity}</p>
             <p className='ml-6 my-2 text-lg'>Total Price: ${total}</p>
             <p className='ml-6 my-2 text-lg'>Total Shipping Charge: ${shipping}</p>

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../images/shijan.jpg'
+import { AuthContext } from '../contexts/UserContext';
 
 const SignUp = () => {
 
     const [showpass, setShowPass] = useState(false);
     const [error, setError] = useState(null);
+
+    const { createUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,6 +32,16 @@ const SignUp = () => {
             setError('Your Password Did not Match');
             return;
         }
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                form.reset();
+                console.log(user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error('error', error);
+            })
     }
     return (
         <div className='my-10'>
@@ -44,13 +61,13 @@ const SignUp = () => {
                     </div>
                     <div className="bg-white shadow-lg rounded xl:w-1/3 lg:w-5/12 md:w-1/2 w-full lg:px-10 sm:px-6 sm:py-10 px-2 py-6">
                         <p tabIndex={0} className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">
-                            Login to your account
+                            Create an account
                         </p>
                         <p tabIndex={0} className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
-                            Dont have account?{" "}
+                            Already have an Account?{" "}
                             <Link to='/login' className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none text-gray-800 cursor-pointer">
                                 {" "}
-                                Sign up here
+                                Sign In here
                             </Link>
                         </p>
                         <button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 p-3 border rounded-lg border-gray-700 flex items-center w-full mt-10 hover:bg-gray-100">
@@ -128,12 +145,12 @@ const SignUp = () => {
                         </div>
                         <p className='text-lg text-red-700'> {error} </p>
                         <div className="mt-6 w-full">
-                            <label htmlFor="myInput" className="text-sm font-medium leading-none text-gray-800">
+                            <label htmlFor="myInputt" className="text-sm font-medium leading-none text-gray-800">
                                 {" "}
                                 Confirm Password{" "}
                             </label>
                             <div className="relative flex items-center justify-center">
-                                <input name='confirm' id="myInput" type={showpass ? "text" : "password"} className="bg-gray-200 border rounded text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" required />
+                                <input name='confirm' id="myInputt" type={showpass ? "text" : "password"} className="bg-gray-200 border rounded text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" required />
                                 <div onClick={() => setShowPass(!showpass)} className="absolute right-0 mt-2 mr-3 cursor-pointer">
                                     <div id="show">
                                         <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
