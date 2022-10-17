@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import './Cart.css';
-import { Link } from 'react-router-dom';
+
 
 const Cart = (props) => {
-    const { cart, clearCart } = props;
+    const { cart, clearCart, children } = props;
 
     // console.log(cart);
 
@@ -30,26 +30,21 @@ const Cart = (props) => {
 
 
     return (
-        <div className='cart'>
-            <h3 className='center'>Order Summary</h3>
-            <p className='left'>Selected Items: {quantity}</p>
-            <p className='left'>Total Price: ${total}</p>
-            <p className='left'>Total Shipping Charge: ${shipping}</p>
-            <p className='left'>Tax: ${tax}</p>
-            <h3 className='left cart-bottom'>Grand Total: ${grandTotal.toFixed(2)}</h3>
+        <div className='sticky top-28 pb-60'>
+            <h3 className='mt-36 text-center text-xl font-bold mb-10'>Order Summary</h3>
+            <p className='ml-6 my-2 text-lg'>Selected Items: {quantity}</p>
+            <p className='ml-6 my-2 text-lg'>Total Price: ${total}</p>
+            <p className='ml-6 my-2 text-lg'>Total Shipping Charge: ${shipping}</p>
+            <p className='ml-6 my-2 text-lg'>Tax: ${tax}</p>
+            <h3 className='ml-6 my-2 text-lg mb-16'>Grand Total: ${grandTotal.toFixed(2)}</h3>
 
 
-            <button className='btn red' onClick={clearCart}>
+            <button className='bg-red-600 hover:bg-red-800 text-white flex w-2/3 p-3 mx-auto items-center justify-evenly rounded-lg' onClick={clearCart}>
                 <p>Clear Cart </p>
                 <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
             </button>
+            {children}
 
-            <Link to='/orders'>
-                <button className='btn orrange'>
-                    <p>Review Order </p>
-                    <FontAwesomeIcon className='icon' icon={faArrowRight}></FontAwesomeIcon>
-                </button>
-            </Link>
         </div>
     );
 };

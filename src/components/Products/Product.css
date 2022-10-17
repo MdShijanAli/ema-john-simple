@@ -28,35 +28,3 @@
 .product-info {
     margin: 7px;
 }
-
-.bottom {
-    margin-top: 50px;
-    margin-bottom: 0;
-
-}
-
-.btn-cart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    background-color: #FFE0B3;
-    border: none;
-    border-radius: 0 0 10px 10px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-}
-
-.btn-cart p {
-    margin-right: 10px;
-}
-
-.btm {
-    margin-bottom: 50px;
-}
-
-.btn-cart:hover {
-    background-color: deeppink;
-}

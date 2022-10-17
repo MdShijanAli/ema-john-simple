@@ -6,7 +6,7 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 import './Orders.css'
 
 const Orders = () => {
-    const { products, initialCart } = useLoaderData(); // { products, initialCart }
+    const { initialCart } = useLoaderData(); // { products, initialCart }
     const [cart, setCart] = useState(initialCart);
 
     const clearCart = () => {
@@ -31,7 +31,7 @@ const Orders = () => {
                     ></ReviewItem>)
                 }
                 {
-                    cart.length === 0 && <h2 className='no-item'>No Item's for Review. Please Buy Something from <Link to='/'>Shop Page</Link></h2>
+                    cart.length === 0 && <h2 className='text-xl text-center'>No Item's for Review. Please Buy Something from <span className='text-xl font-bold text-blue-900 underline decoration-solid decoration-blue-900'><Link to='/'>Shop Page</Link></span></h2>
                 }
             </div>
             <div className="cart-container">

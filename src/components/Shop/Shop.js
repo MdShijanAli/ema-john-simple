@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { addToDb, deleteShoppingCart, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Products/Product';
@@ -56,7 +58,7 @@ const Shop = () => {
     }
 
     return (
-        <div className='shop-container'>
+        <div className='shop-container '>
             <div className="products-container">
                 {
                     products.map(product => <Product
@@ -67,10 +69,14 @@ const Shop = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart
-                    cart={cart}
-                    clearCart={clearCart}
-                ></Cart>
+                <Cart cart={cart} clearCart={clearCart}>
+                    <Link to='/orders'>
+                        <button className='bg-orange-500 hover:bg-orange-800 text-white flex w-2/3 mt-5 mx-auto p-3 items-center justify-evenly rounded-lg'>
+                            <p>Review Order </p>
+                            <FontAwesomeIcon className='text-xl' icon={faArrowRight}></FontAwesomeIcon>
+                        </button>
+                    </Link>
+                </Cart>
             </div>
 
         </div>
